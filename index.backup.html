@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoVerse | Neo Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 30%, #0a0a0a, #000000);
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* partikel animasi */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"><circle cx="100" cy="100" r="1.5" fill="white" opacity="0.6"/><circle cx="500" cy="300" r="1" fill="white" opacity="0.4"/><circle cx="1200" cy="700" r="2" fill="white" opacity="0.5"/><circle cx="1600" cy="400" r="1.5" fill="white" opacity="0.3"/><circle cx="300" cy="1100" r="1" fill="white" opacity="0.7"/><circle cx="800" cy="1500" r="2" fill="white" opacity="0.5"/><circle cx="1400" cy="1300" r="1.5" fill="white" opacity="0.6"/><circle cx="1800" cy="900" r="1" fill="white" opacity="0.4"/></svg>');
+      background-repeat: repeat;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* navbar keren */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(10, 10, 20, 0.6);
+      backdrop-filter: blur(15px);
+      border-radius: 60px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      font-size: 2rem;
+    }
+
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 30px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #00ffff;
+      text-shadow: 0 0 8px cyan;
+    }
+
+    /* header section */
+    .hero {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, #fff, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowPulse 2s infinite;
+    }
+
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px cyan);}
+      50% { filter: drop-shadow(0 0 15px magenta);}
+      100% { filter: drop-shadow(0 0 2px cyan);}
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 1.1rem;
+    }
+
+    /* total card */
+    .total-card {
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+      backdrop-filter: blur(15px);
+      border-radius: 30px;
+      padding: 35px;
+      text-align: center;
+      margin: 30px auto;
+      max-width: 600px;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+    }
+
+    .total-label {
+      font-size: 1rem;
+      letter-spacing: 4px;
+      color: cyan;
+      text-transform: uppercase;
+    }
+
+    .total-value {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin: 15px 0;
+      word-break: break-word;
+    }
+
+    .total-sub {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* grid portfolio */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 50px 0;
+    }
+
+    .coin-card {
+      background: rgba(20, 20, 40, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 25px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+
+    .coin-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: cyan;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+    }
+
+    .coin-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .coin-icon {
+      font-size: 2.8rem;
+      filter: drop-shadow(0 0 6px cyan);
+    }
+
+    .coin-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .coin-symbol {
+      font-size: 0.8rem;
+      color: cyan;
+      letter-spacing: 1px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      font-size: 0.95rem;
+    }
+
+    .holdings-box {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 16px;
+      padding: 12px;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .profit {
+      color: #00ff88;
+      text-shadow: 0 0 4px #00ff88;
+    }
+
+    .loss {
+      color: #ff4444;
+      text-shadow: 0 0 4px #ff4444;
+    }
+
+    .refresh-btn {
+      background: linear-gradient(90deg, cyan, magenta);
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+      transition: 0.3s;
+    }
+
+    .refresh-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px;
+      opacity: 0.6;
+      font-size: 0.8rem;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 60px;
+      color: cyan;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .total-value { font-size: 2rem; }
+      .navbar { flex-direction: column; gap: 15px; }
+      .nav-links a { margin: 0 15px; }
+    }
+  </style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="container">
+  <div class="navbar">
+    <div class="logo"><span>🪙</span> CRYPTOVERSE</div>
+    <div class="nav-links">
+      <a href="#">🏠 Dashboard</a>
+      <a href="#">📊 Market</a>
+      <a href="#">⚡ Portfolio</a>
+      <a href="#">🌐 Contact</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>✦ NEO PORTFOLIO ✦</h1>
+    <p>tracking aset crypto kamu dengan gaya futuristik</p>
+  </div>
+
+  <div class="total-card">
+    <div class="total-label">💎 TOTAL VALUE 💎</div>
+    <div class="total-value" id="totalValue">$ --</div>
+    <div class="total-sub">≈ <span id="totalIdr">0</span> IDR | last update realtime</div>
+  </div>
+
+  <div class="portfolio-grid" id="portfolioGrid">
+    <div class="loading-spinner">🌀 LOADING BLOCKCHAIN DATA... 🌀</div>
+  </div>
+
+  <button class="refresh-btn" id="refreshBtn">⟳ REFRESH HARGA ⟳</button>
+  <div class="footer">
+    ⚡ powered by CoinGecko API | edit jumlah crypto di variable `myAssets`
+  </div>
+</div>
+
+<script>
+  // ====== EDIT JUMLAH HOLDING KAMU DI SINI ======
+  const myAssets = [
+    { id: "bitcoin", name: "Bitcoin", symbol: "BTC", icon: "₿", amount: 0.042 },
+    { id: "ethereum", name: "Ethereum", symbol: "ETH", icon: "⟠", amount: 1.2 },
+    { id: "solana", name: "Solana", symbol: "SOL", icon: "⚡", amount: 25.5 },
+    { id: "cardano", name: "Cardano", symbol: "ADA", icon: "₳", amount: 1250 },
+    { id: "ripple", name: "XRP", symbol: "XRP", icon: "💧", amount: 800 },
+    { id: "dogecoin", name: "Dogecoin", symbol: "DOGE", icon: "🐕", amount: 5000 }
+  ];
+
+  let livePrices = {};
+
+  async function fetchCryptoPrices() {
+    try {
+      const ids = myAssets.map(a => a.id).join(',');
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.error("fetch error", err);
+      return null;
+    }
+  }
+
+  async function getIDRRate() {
+    try {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=idr');
+      const data = await res.json();
+      return data.usd?.idr || 15500;
+    } catch {
+      return 15500;
+    }
+  }
+
+  async function renderDashboard() {
+    const grid = document.getElementById('portfolioGrid');
+    grid.innerHTML = '<div class="loading-spinner">✨ FETCHING ON-CHAIN DATA ✨</div>';
+
+    const prices = await fetchCryptoPrices();
+    const idrRate = await getIDRRate();
+
+    if (!prices) {
+      grid.innerHTML = '<div class="loading-spinner">⚠️ GAGAL AMBIL DATA, REFRESH ⚠️</div>';
+      return;
+    }
+
+    let totalUSD = 0;
+    const cardsData = [];
+
+    for (let asset of myAssets) {
+      const data = prices[asset.id];
+      if (data && data.usd) {
+        const priceUSD = data.usd;
+        const change24h = data.usd_24h_change || 0;
+        const valueUSD = priceUSD * asset.amount;
+        totalUSD += valueUSD;
+        cardsData.push({ ...asset, priceUSD, change24h, valueUSD });
+      } else {
+        cardsData.push({ ...asset, priceUSD: 0, change24h: 0, valueUSD: 0, error: true });
+      }
+    }
+
+    const totalIDR = totalUSD * idrRate;
+    document.getElementById('totalValue').innerHTML = `$${totalUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    document.getElementById('totalIdr').innerText = `Rp ${totalIDR.toLocaleString('id-ID')}`;
+
+    grid.innerHTML = '';
+    cardsData.forEach(coin => {
+      const card = document.createElement('div');
+      card.className = 'coin-card';
+      const changeClass = coin.change24h >= 0 ? 'profit' : 'loss';
+      const changeIcon = coin.change24h >= 0 ? '📈' : '📉';
+
+      card.innerHTML = `
+        <div class="coin-header">
+          <div class="coin-icon">${coin.icon}</div>
+          <div>
+            <div class="coin-name">${coin.name} <span class="coin-symbol">${coin.symbol}</span></div>
+            <div style="font-size: 0.7rem;">🔹 ${coin.amount} ${coin.symbol}</div>
+          </div>
+        </div>
+        <div class="price-row">
+          <span>💵 $${coin.priceUSD.toLocaleString()}</span>
+          <span class="${changeClass}">${changeIcon} ${Math.abs(coin.change24h).toFixed(2)}%</span>
+        </div>
+        <div class="holdings-box">
+          🪙 NILAI: <strong>$${coin.valueUSD.toLocaleString(undefined, { minimumFractionDigits: 2 })}</strong><br>
+          <span style="font-size: 0.75rem;">≈ Rp ${(coin.valueUSD * idrRate).toLocaleString('id-ID')}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  document.getElementById('refreshBtn').addEventListener('click', () => {
+    renderDashboard();
+  });
+
+  renderDashboard();
+  setInterval(renderDashboard, 60000);
+</script>
+</body>
+</html>
