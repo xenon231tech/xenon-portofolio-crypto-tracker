@@ -7,7 +7,7 @@
 
 ## ✨ Fitur
 - 💹 Harga real-time (BTC, ETH, SOL, ADA, XRP, DOGE)
-- 💰 Total nilai portofolio (USD + IDR)
+- 💰 Total nilai portfolio (USD + IDR)
 - 📈 Indikator profit/loss 24 jam
 - 🔄 Auto refresh setiap 60 detik
 - 📱 Responsive design
@@ -16,7 +16,7 @@
 Ubah jumlah holding kamu di variabel `myAssets` pada file `index.html`
 
 ## 🌐 Live Demo
-[https://xenonsixtytwo.github.io/xenon-portofolio-crypto-tracker/](https://xenonsixtytwo.github.io/xenon-portofolio-crypto-tracker/)
+[https://xenonsixtytwo.github.io/xenon-portfolio-crypto-tracker/](https://xenonsixtytwo.github.io/xenon-portfolio-crypto-tracker/)
 
 ## 📞 Kontak
 Dibuat dengan 💜 oleh **xenonsixtytwo**  
