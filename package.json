@@ -16,14 +16,19 @@
     "professional",
     "crypto"
   ],
-  "author": "xenon231tech",
+  "author": {
+    "name": "Xenon",
+    "email": "xannrlcs@gmail.com",
+    "url": "https://xenon.dev"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/xenon231tech/xenon-portofolio-crypto-tracker.git"
   },
   "bugs": {
-    "url": "https://github.com/xenon231tech/xenon-portofolio-crypto-tracker/issues"
+    "url": "https://github.com/xenon231tech/xenon-portofolio-crypto-tracker/issues",
+    "email": "xannrlcs@gmail.com"
   },
-  "homepage": "https://github.com/xenon231tech/xenon-portofolio-crypto-tracker#readme"
+  "homepage": "https://xenon.dev"
 }
